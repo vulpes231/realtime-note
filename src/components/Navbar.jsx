@@ -1,22 +1,30 @@
 import React from "react";
 import Logo from "./Logo";
 import { Link } from "react-router-dom";
-import { MdMenu } from "react-icons/md";
+import { MdClose, MdMenu } from "react-icons/md";
+import { useDispatch, useSelector } from "react-redux";
+import Mobilemodal from "./Mobilemodal";
+import { setToggle } from "../features/navSlice";
 
 const Navbar = () => {
+	const dispatch = useDispatch();
+	const { toggle } = useSelector((state) => state.nav);
 	return (
-		<div className="p-6">
+		<div className="p-6 fixed top-0 left-0 w-full h-[70px]">
 			<nav className="flex items-center justify-between">
 				<Logo />
-				<div className="flex items-center gap-4">
+				<div className="hidden lg:flex items-center gap-4 ">
 					{["about", "contact", "pricing"].map((link, index) => {
 						return <Link key={index}>{link}</Link>;
 					})}
 				</div>
-				<span>
-					<MdMenu />
-				</span>
-				<div className="flex items-center gap-4">
+				<button
+					onClick={() => dispatch(setToggle())}
+					className="lg:hidden w-8 h-8"
+				>
+					{!toggle ? <MdMenu /> : <MdClose />}
+				</button>
+				<div className="hidden lg:flex items-center gap-4">
 					{[
 						{ id: "login", name: "sign in", path: "/signin" },
 						{ id: "register", name: "sign up", path: "/signup" },
@@ -37,6 +45,7 @@ const Navbar = () => {
 					})}
 				</div>
 			</nav>
+			{toggle && <Mobilemodal />}
 		</div>
 	);
 };
