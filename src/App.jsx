@@ -1,17 +1,21 @@
 import React from "react";
 import { Route, Routes } from "react-router-dom";
 import Landing from "./pages/Landing";
-import { Navbar } from "./components";
-import { Signin, Signup } from "./pages";
+import { Authnav, Navbar } from "./components";
+import { Createnote, Dashboard, Settings, Signin, Signup } from "./pages";
 
 const App = () => {
+	const token = sessionStorage.getItem("token");
 	return (
 		<div>
-			<Navbar />
+			{!token ? <Navbar /> : <Authnav />}
 			<Routes>
 				<Route path="/" element={<Landing />} />
 				<Route path="/signin" element={<Signin />} />
 				<Route path="/signup" element={<Signup />} />
+				<Route path="/dashboard" element={<Dashboard />} />
+				<Route path="/create" element={<Createnote />} />
+				<Route path="/settings" element={<Settings />} />
 			</Routes>
 		</div>
 	);
