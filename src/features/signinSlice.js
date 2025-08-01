@@ -1,6 +1,6 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
-import { sendError } from "../constants";
 import axios from "axios";
+import { devServer } from "../constants";
 
 const initialState = {
 	signinLoading: false,
@@ -10,9 +10,9 @@ const initialState = {
 
 export const signinUser = createAsyncThunk(
 	"signin/signinUser",
-	async (formData) => {
+	async (formData, { rejectWithValue }) => {
 		try {
-			const url = "";
+			const url = `${devServer}/signin`;
 			const response = await axios.post(url, formData, {
 				headers: {
 					"Content-Type": "application/json",
@@ -20,7 +20,10 @@ export const signinUser = createAsyncThunk(
 			});
 			return response.data;
 		} catch (error) {
-			sendError(error);
+			return rejectWithValue({
+				status: error.response?.status,
+				message: error.response?.data?.message || error.message,
+			});
 		}
 	}
 );

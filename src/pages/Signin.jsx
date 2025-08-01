@@ -4,6 +4,7 @@ import { FaInstagram, FaX, FaTelegram } from "react-icons/fa6";
 import { useDispatch, useSelector } from "react-redux";
 import { resetSignin, signinUser } from "../features/signinSlice";
 import { format } from "date-fns";
+import { Errormodal, Loader } from "../components";
 
 const Signin = () => {
 	const dispatch = useDispatch();
@@ -44,7 +45,7 @@ const Signin = () => {
 
 		for (const key in form) {
 			if (form[key] === "") {
-				setError(`${form[key]} is required!`);
+				setError(`${key[0].toUpperCase() + key.slice(1)} is required!`);
 				return;
 			}
 		}
@@ -54,7 +55,7 @@ const Signin = () => {
 
 	useEffect(() => {
 		if (signinError && signinError !== null) {
-			setError(signinError);
+			setError(signinError.message);
 		}
 	}, [signinError]);
 
@@ -87,9 +88,9 @@ const Signin = () => {
 		<section className="mt-[70px] bg-slate-50 min-h-screen p-[15px] flex flex-col gap-6">
 			<form
 				action=""
-				className="flex flex-col gap-4 bg-white p-6 shadow-sm rounded-[10px] mt-[20px] md:w-[390px] md:mx-auto"
+				className="flex flex-col gap-4 bg-white p-6 shadow-sm rounded-[10px] mt-[20px] sm:w-[390px] sm:mx-auto"
 			>
-				<h3 className="font-semibold text-[18px] lg:text-[22px] py-[10px]">
+				<h3 className="font-black text-[18px] lg:text-[22px] py-[10px]">
 					Sign in to access features.
 				</h3>
 				{inputs.map((input) => {
@@ -132,6 +133,8 @@ const Signin = () => {
 					<FaTelegram className="w-6 h-6 cursor-pointer hover:text-blue-500" />
 				</div>
 			</div>
+			{error && <Errormodal error={error} onClose={() => setError("")} />}
+			{signinLoading && <Loader text={"Signing in..."} />}
 		</section>
 	);
 };

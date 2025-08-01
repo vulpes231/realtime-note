@@ -1,10 +1,4 @@
-function sendError(error) {
-	if (error.response) {
-		const errMsg = error.response.message.data;
-		throw new Error(errMsg);
-	} else {
-		throw error;
-	}
-}
+const devServer = "http://localhost:4000";
+const liveServer = "";
 
-export { sendError };
+export { devServer, liveServer };

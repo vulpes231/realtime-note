@@ -17,7 +17,13 @@ const Navbar = () => {
 				<Logo />
 				<Navlinks customClass={"hidden lg:flex items-center gap-4"} />
 
-				<button onClick={() => dispatch(setToggle())} className="lg:hidden ">
+				<button
+					onClick={(e) => {
+						e.stopPropagation();
+						dispatch(setToggle());
+					}}
+					className="lg:hidden "
+				>
 					{!toggle ? (
 						<MdMenu className="w-6 h-6" />
 					) : (

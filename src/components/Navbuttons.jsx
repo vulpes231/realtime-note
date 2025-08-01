@@ -1,10 +1,11 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import { setToggle } from "../features/navSlice";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 
 const Navbuttons = ({ customClass }) => {
 	const dispatch = useDispatch();
+	const { toggle } = useSelector((state) => state.nav);
 	return (
 		<div className={customClass}>
 			{[
@@ -15,8 +16,11 @@ const Navbuttons = ({ customClass }) => {
 					<Link
 						onClick={(e) => {
 							e.preventDefault();
+							e.stopPropagation();
 							window.location.href = link.path;
-							dispatch(setToggle());
+							if (toggle) {
+								dispatch(setToggle());
+							}
 						}}
 						className={`${
 							link.id === "login"
