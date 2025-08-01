@@ -5,7 +5,7 @@ const Logo = () => {
 	return (
 		<Link to={"/"}>
 			<h1 className="text-[18px] md:text-[22px] lg:text-[30px] font-semibold capitalize">
-				notesapp
+				neuraljot
 			</h1>
 		</Link>
 	);
