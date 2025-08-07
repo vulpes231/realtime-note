@@ -12,14 +12,16 @@ export const signinUser = createAsyncThunk(
 	"signin/signinUser",
 	async (formData, { rejectWithValue }) => {
 		try {
-			const url = `${devServer}/signin`;
+			const url = `${devServer}/login`;
 			const response = await axios.post(url, formData, {
 				headers: {
 					"Content-Type": "application/json",
 				},
 			});
+			console.log(response.data);
 			return response.data;
 		} catch (error) {
+			console.log(error);
 			return rejectWithValue({
 				status: error.response?.status,
 				message: error.response?.data?.message || error.message,

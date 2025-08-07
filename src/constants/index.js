@@ -3,11 +3,6 @@ const liveServer = "";
 
 const authLinks = [
 	{
-		id: "notes",
-		name: "notes",
-		path: "/notes",
-	},
-	{
 		id: "settings",
 		name: "settings",
 		path: "/settings",

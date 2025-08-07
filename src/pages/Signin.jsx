@@ -9,7 +9,7 @@ import { Errormodal, Loader } from "../components";
 const Signin = () => {
 	const dispatch = useDispatch();
 	const [form, setForm] = useState({
-		email: "",
+		username: "",
 		password: "",
 	});
 	const [error, setError] = useState("");
@@ -20,11 +20,11 @@ const Signin = () => {
 
 	const inputs = [
 		{
-			id: "email",
-			label: "email",
+			id: "username",
+			label: "username",
 			type: "text",
-			value: form.email,
-			name: "email",
+			value: form.username,
+			name: "username",
 		},
 		{
 			id: "password",

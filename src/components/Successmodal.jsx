@@ -1,4 +1,6 @@
 import React from "react";
+import { BiSolidErrorAlt } from "react-icons/bi";
+import { MdClose } from "react-icons/md";
 
 const Successmodal = ({ text, onClose }) => {
 	return (

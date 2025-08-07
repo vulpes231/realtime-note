@@ -9,6 +9,7 @@ const Signup = () => {
 	const dispatch = useDispatch();
 	const [form, setForm] = useState({
 		email: "",
+		username: "",
 		password: "",
 		confirmPassword: "",
 	});
@@ -19,6 +20,13 @@ const Signup = () => {
 	);
 
 	const inputs = [
+		{
+			id: "username",
+			label: "username",
+			type: "text",
+			value: form.username,
+			name: "username",
+		},
 		{
 			id: "email",
 			label: "email",
@@ -138,7 +146,7 @@ const Signup = () => {
 				</div>
 			</div>
 			{error && <Errormodal error={error} onClose={() => setError("")} />}
-			{createUserLoading && <Loader text={"Signing in..."} />}
+			{createUserLoading && <Loader text={"Creating account..."} />}
 			{userCreated && <Successmodal text={"Account created."} />}
 		</section>
 	);
